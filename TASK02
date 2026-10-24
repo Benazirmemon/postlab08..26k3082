@@ -1,0 +1,38 @@
+#include<stdio.h>
+int main(){
+   int hostempmonitoring[2][3][4];
+   int i,j,k;
+   int readingscount=0;
+   for(i=0;i<2;i++){
+    float highesttemp=0.0;
+    
+    for(j=0;j<3;j++){
+        float total=0.0;
+        for(k=0;k<4;k++){
+            printf("wards %d containing patient %d temp recorded %d",i+1,j+1,k+1);
+            scanf("%d",&hostempmonitoring[i][j][k]);
+            total+=hostempmonitoring[i][j][k];
+            if (hostempmonitoring[i][j][k]>37.5)
+            {
+               readingscount++;
+            }
+            if(hostempmonitoring[i][j][k]>highesttemp){
+                highesttemp=hostempmonitoring[i][j][k];
+            }
+            
+        }
+        float average=total/4.0;
+        printf("average is %.2f",average);
+        if (average>38)
+        {
+            printf("alert average temp exceed 38!");
+        }
+        
+
+    }
+    printf("ward %d highest temp %.2fC",i+1,highesttemp);
+   }
+    printf("total readings above the 37.5 across all wards %d",readingscount);
+   
+
+}
