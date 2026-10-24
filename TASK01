@@ -1,0 +1,62 @@
+#include<stdio.h>
+int main(){
+int marks[2][3][4]={{{50,60,70,80},{40,50,60,70},{30,40,50,60}},{{50,60,70,80},{40,50,60,70},{30,40,50,60}}};
+int i,j,k,total,count=0;
+float highest,average,highestscoringstd,sectiontotal;
+float sectionaverage,sectionaverages[2];
+
+for (i=0;i<2;i++){
+    highest=-1;
+    sectiontotal=0;
+    for(j=0;j<3;j++){
+        total=0;
+        for  (k=0; k<4; k++)
+        {
+            total+=marks[i][j][k];
+
+        }
+        average=total/4.0;
+        sectiontotal+=average;
+        printf("section %d,student%d\n",i+1,j+1);
+        printf("total=%d\n",total);
+        printf("average=%.2f\n",average);
+        if(average>=50){
+            count++;
+        }
+         if (total > highest) {
+                highest = total;
+                highestscoringstd = j + 1;
+            }
+        }
+
+        printf("Highest student in Section %d = Student %d\n",
+               i + 1, highestscoringstd);
+
+        sectionaverage = sectiontotal / 3;
+        sectionaverages[i] = sectionaverage;
+
+        printf("Section Average = %.2f\n\n", sectionaverage);
+    }
+
+    printf("Students with average at least 50 = %d\n", count);
+
+    if (sectionaverages[0] > sectionaverages[1]) {
+        printf("Section 1 has highest overall average\n");
+    }
+    else if (sectionaverages[1] > sectionaverages[0]) {
+        printf("Section 2 has highest overall average\n");
+    }
+    else {
+        printf("Both sections have equal average\n");
+    }
+
+    
+}
+        
+    
+    
+
+
+
+    
+
