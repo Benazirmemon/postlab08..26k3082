@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+void calculateBill(int price, int qty, int member, int card);
+
+int main() {
+    int price, qty, member, card;
+
+    printf("Enter Product Price: ");
+    scanf("%d", &price);
+
+    printf("Enter Quantity: ");
+    scanf("%d", &qty);
+
+    printf("Is Member? (1/0): ");
+    scanf("%d", &member);
+
+    printf("Pay by Card? (1/0): ");
+    scanf("%d", &card);
+
+    calculateBill(price, qty, member, card);
+
+    return 0;
+}
+
+void calculateBill(int price, int qty, int member, int card) {
+    int subtotal = price * qty;
+    float bulkDiscount = 0.0;
+    float memberDiscount = 0.0;
+    float fee = 0.0;
+    float total = subtotal;
+
+    if (subtotal > 5000) {
+        bulkDiscount = subtotal * 0.10;
+    }
+
+    if (member == 1) {
+        memberDiscount = subtotal * 0.05;
+    }
+
+    total = total - bulkDiscount - memberDiscount;
+
+    if (card == 1) {
+        fee = total * 0.02;
+    }
+
+    total = total + fee;
+
+    printf("\n Bill Details\n");
+    printf("Subtotal: Rs. %d\n", subtotal);
+    printf("Bulk Discount: Rs. %.2f\n", bulkDiscount);
+    printf("Member Discount: Rs. %.2f\n", memberDiscount);
+    printf("Payment Fee: Rs. %.2f\n", fee);
+    printf("Final Payable: Rs. %.2f\n", total);
+}
