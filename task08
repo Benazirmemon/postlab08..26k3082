@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+float calculateBaseCharges(float weight);
+float calculateDistanceCharges(float distance);
+float calculateDiscount(float total_before_discount, int is_member);
+
+int main() {
+    float weight, distance;
+    int is_member;
+    
+    float base_charges, distance_charges, total_charges;
+    float discount = 0.0, final_amount;
+
+    printf("Delivery Charges Calculator\n");
+
+    
+    printf("Enter parcel weight (in kg): ");
+    scanf("%f", &weight);
+
+    printf("Enter delivery distance (in km): ");
+    scanf("%f", &distance);
+
+    printf("Is the customer a member? (1 for Yes, 0 for No): ");
+    scanf("%d", &is_member);
+
+    base_charges = calculateBaseCharges(weight);
+    distance_charges = calculateDistanceCharges(distance);
+    
+    total_charges = base_charges + distance_charges;
+    discount = calculateDiscount(total_charges, is_member);
+    final_amount = total_charges - discount;
+
+
+    
+    printf("Base Weight Charges:  Rs. %.2f\n", base_charges);
+    printf("Distance Charges:     Rs. %.2f\n", distance_charges);
+    printf("Total Before Discount:Rs. %.2f\n", total_charges);
+    printf("Discount Applied:    Rs. %.2f\n", discount);
+
+    printf("Final Payable Amount: Rs. %.2f\n", final_amount);
+
+    return 0;
+}
+
+float calculateBaseCharges(float weight) {
+    if (weight <= 2.0) {
+        return 200.0;
+    } else if (weight <= 5.0) {
+        return 400.0;
+    } else {
+        return 700.0;
+    }
+}
+
+float calculateDistanceCharges(float distance) {
+    if (distance > 10.0) {
+        return (distance - 10.0) * 20.0;
+    }
+    return 0.0; 
+}
+float calculateDiscount(float total_before_discount, int is_member) {
+    if (is_member == 1 && total_before_discount > 1000.0) {
+        return total_before_discount * 0.10;
+    }
+    return 0.0;
+}
