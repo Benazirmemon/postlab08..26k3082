@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+void checkLoanEligibility(int age, float salary, float payments);
+float calculateMaxLoan(float remaining_income);
+
+int main() {
+    int age;
+    float monthly_salary, existing_payments;
+
+    printf("--- Loan Eligibility Checker ---\n");
+    printf("Enter applicant's age: ");
+    scanf("%d", &age);
+
+    printf("Enter monthly salary (Rs.): ");
+    scanf("%f", &monthly_salary);
+
+    printf("Enter existing monthly loan payments (Rs.): ");
+    scanf("%f", &existing_payments);
+
+
+    checkLoanEligibility(age, monthly_salary, existing_payments);
+
+    return 0;
+}
+
+void checkLoanEligibility(int age, float salary, float payments) {
+    float remaining_income = salary - payments;
+    float remaining_percentage = (remaining_income / salary) * 100;
+
+
+ 
+    if (age < 21) {
+        printf("Status: REJECTED\n");
+        printf("Reason: Applicant must be at least 21 years old (Current age: %d).\n", age);
+    } 
+    else if (salary < 50000) {
+        printf("Status: REJECTED\n");
+        printf("Reason: Monthly salary must be at least Rs. 50,000 (Current salary: Rs. %.2f).\n", salary);
+    } 
+    else if (remaining_percentage < 40.0) {
+        printf("Status: REJECTED\n");
+        printf("Reason: Remaining income after existing payments is %.2f%%. It must be at least 40%%.\n", remaining_percentage);
+    } 
+    else {
+      
+        float max_loan_amount = calculateMaxLoan(remaining_income);
+        
+        printf("Status: APPROVED\n");
+        printf("Remaining Monthly Income: Rs. %.2f %.2f percentage of salary)\n", remaining_income, remaining_percentage);
+        printf("Maximum Eligible Loan Amount: Rs. %.2f\n", max_loan_amount);
+    }
+}
+
+float calculateMaxLoan(float remaining_income) {
+    return remaining_income * 10;
+}
